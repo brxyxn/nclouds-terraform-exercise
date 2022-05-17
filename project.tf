@@ -45,7 +45,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = element(aws_subnet.public_subnet.*.id, 0)
   depends_on    = [aws_internet_gateway.xyx-ig]
   tags = {
-    Name        = "nat"
+    Name        = "${var.environment}-nat"
     Environment = "${var.environment}"
   }
 }

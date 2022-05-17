@@ -1,4 +1,19 @@
-# NCLOUDS AWS + TERRAFORM
+# NCLOUDS | AWS + TERRAFORM
+
+This information is part of the **DevOps Bootcamp** taught by nClouds Academy.
+
+## Description
+
+The requested resources for this activity:
+
+- VPC
+- Internet Gateway
+- 3 Public Subnets
+- 3 Private Subnets
+- 2 RouteTables (1 Public, 1 Private)
+- NAT Gateway
+
+**This repository is the proof of delivered.**
 
 ## How to run
 
@@ -8,11 +23,12 @@ Run the following commands in your terminal:
 terraform init
 #terraform plan
 terraform apply
+#terraform destroy
 ```
 
 ## Variables
 
-Remember to add the following format to a file in order to deploy changes to AWS. *Remember to change the placeholder values*
+Remember to add the following format to a file in order to deploy changes to AWS. _Remember to change the placeholder values_
 
 _`values.tfvars`_
 
