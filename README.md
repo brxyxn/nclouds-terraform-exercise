@@ -1,4 +1,4 @@
-# NCLOUDS | AWS + TERRAFORM
+# nClouds | AWS + Terraform
 
 This information is part of the **DevOps Bootcamp** taught by nClouds Academy.
 
@@ -6,12 +6,12 @@ This information is part of the **DevOps Bootcamp** taught by nClouds Academy.
 
 The requested resources for this activity:
 
-- VPC
-- Internet Gateway
-- 3 Public Subnets
-- 3 Private Subnets
-- 2 RouteTables (1 Public, 1 Private)
-- NAT Gateway
+-   VPC
+-   Internet Gateway
+-   3 Public Subnets
+-   3 Private Subnets
+-   2 RouteTables (1 Public, 1 Private)
+-   NAT Gateway
 
 **This repository is the proof of delivered.**
 
