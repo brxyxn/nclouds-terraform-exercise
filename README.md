@@ -4,16 +4,15 @@ This information is part of the **DevOps Bootcamp** taught by nClouds Academy.
 
 ## Description
 
-The requested resources for this activity:
+Modify your Homework 1 and create the following modules:
 
--   VPC
--   Internet Gateway
--   3 Public Subnets
--   3 Private Subnets
--   2 RouteTables (1 Public, 1 Private)
--   NAT Gateway
+- VPC Module
+- Launch configuration Module
+- Autoscaling group Module
 
-**This repository is the proof of delivered.**
+You must follow the standards that we covered during the classes.
+
+Push everything to your Github Repo and send me the link.
 
 ## How to run
 
