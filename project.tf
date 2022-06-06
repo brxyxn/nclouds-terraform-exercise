@@ -16,22 +16,50 @@ module "xyx-vpc" {
 
   region = var.region
 
-  environment = "xyx"
+  availability_zones = var.availability_zones
 
-  availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  environment = var.environment
 
-  vpc_cidr = "170.40.0.0/16"
+  vpc_cidr = var.vpc_cidr
 
-  public_subnets_cidr = ["170.40.0.0/20", "170.40.16.0/20", "170.40.32.0/20"]
+  public_subnets_cidr = var.public_subnets_cidr
 
-  private_subnets_cidr = ["170.40.48.0/20", "170.40.64.0/20", "170.40.80.0/20"]
+  private_subnets_cidr = var.private_subnets_cidr
 }
 
-# module "xyx-asg" {
-#   source = "./modules/autoscaling-group"
+module "xyx-sg" {
+  source = "./modules/security-group"
+  vpc_id = module.xyx-vpc.vpc_id
+  depends_on = [
+    module.xyx-vpc
+  ]
+}
 
-#   asg_name = "xyx-asg-test"
+// launch configuration from modules/launch-configuration
+module "xyx-lc" {
+  source = "./modules/launch-configuration"
 
-#   # lc_name = "xyx-lc-test"
-# }
+  name_prefix = var.environment
 
+  instance_type = var.lc_instance_type
+
+  security_group = module.xyx-sg.sg_group_id
+
+  depends_on = [
+    module.xyx-sg
+  ]
+}
+
+module "xyx-asg" {
+  source = "./modules/autoscaling-group"
+
+  asg_name = var.asg_name
+
+  min_size = var.asg_min_size
+
+  max_size = var.asg_max_size
+
+  lc_name = module.xyx-lc.name
+
+  subnet_ids = module.xyx-vpc.vpc_private_subnets
+}

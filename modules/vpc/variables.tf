@@ -1,3 +1,12 @@
+variable "region" { // default string
+  description = "The region to launch the bastion host"
+}
+
+variable "availability_zones" {
+  type        = list(any)
+  description = "The az that the resources will be launched"
+}
+
 variable "environment" { // default string
   description = "The Deployment environment prefix"
 }
@@ -14,13 +23,4 @@ variable "public_subnets_cidr" {
 variable "private_subnets_cidr" {
   type        = list(any)
   description = "The CIDR block for the private subnet"
-}
-
-variable "region" { // default string
-  description = "The region to launch the bastion host"
-}
-
-variable "availability_zones" {
-  type        = list(any)
-  description = "The az that the resources will be launched"
 }
