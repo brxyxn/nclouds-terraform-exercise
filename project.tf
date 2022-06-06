@@ -7,8 +7,23 @@ terraform {
   }
 }
 
+data "aws_availability_zones" "all" {}
+
+locals {
+  createdAt = formatdate("YYYY-MM-DD", timestamp())
+}
+
 provider "aws" {
   region = var.region
+
+  default_tags {
+    tags = {
+      Environment  = var.environment
+      Owner        = "Brayan Lopez"
+      Project      = "nClouds Bootcamp"
+      CreationDate = local.createdAt
+    }
+  }
 }
 
 module "xyx-vpc" {
@@ -16,15 +31,11 @@ module "xyx-vpc" {
 
   region = var.region
 
-  availability_zones = var.availability_zones
+  availability_zones = data.aws_availability_zones.all.names
 
   environment = var.environment
 
   vpc_cidr = var.vpc_cidr
-
-  public_subnets_cidr = var.public_subnets_cidr
-
-  private_subnets_cidr = var.private_subnets_cidr
 }
 
 module "xyx-sg" {
