@@ -8,7 +8,7 @@ terraform {
 }
 
 resource "time_static" "example" {
-  #   rfc3339 = timestamp()
+  rfc3339 = "2022-06-05T23:10:00Z"
 }
 
 /* There's a bug related with the provided and timestamp is */
@@ -23,6 +23,7 @@ provider "aws" {
 
   default_tags {
     tags = {
+      Name        = "${var.environment}"
       Environment = "${var.environment}"
       Owner       = "Brayan Lopez"
       Project     = "nClouds Bootcamp"
