@@ -7,18 +7,16 @@ terraform {
   }
 }
 
-resource "time_static" "example" {}
-
-data "aws_availability_zones" "all" {}
+resource "time_static" "example" {
+  #   rfc3339 = timestamp()
+}
 
 /* There's a bug related with the provided and timestamp is */
 locals {
-  timestamp_formatted = formatdate("YYYY-MM-DD  hh:mm", time_static.example.month)
+  timestamp_formatted = formatdate("YYYY-MM-DD hh:mm", time_static.example.rfc3339)
 }
 
-output "timestamp_formatted" {
-  value = local.timestamp_formatted
-}
+data "aws_availability_zones" "all" {}
 
 provider "aws" {
   region = var.region
@@ -28,6 +26,7 @@ provider "aws" {
       Environment = "${var.environment}"
       Owner       = "Brayan Lopez"
       Project     = "nClouds Bootcamp"
+      CreatedAt   = local.timestamp_formatted
     }
   }
 }

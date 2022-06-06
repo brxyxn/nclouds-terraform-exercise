@@ -16,16 +16,6 @@ variable "vpc_cidr" { // default string
   description = "The CIDR block of the vpc"
 }
 
-# variable "public_subnets_cidr" {
-#   type        = list(any)
-#   description = "Value of the CIDR list for the public subnet"
-# }
-
-# variable "private_subnets_cidr" {
-#   type        = list(any)
-#   description = "Value of the CIDR list for the public subnet"
-# }
-
 # Launch Configuration Variables
 variable "lc_name" {
   description = "The name of the launch configuration"
