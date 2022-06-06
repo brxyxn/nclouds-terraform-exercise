@@ -28,28 +28,57 @@ terraform apply
 
 ## Variables
 
-Remember to add the following format to a file in order to deploy changes to AWS. _Remember to change the placeholder values_
+Remember to add the following format to a file in order to deploy changes to AWS.
 
-_`values.tfvars`_
+_For your convenience you can copy the following values and run apply the changes_
+
+_`values.auto.tfvars`_
 
 ```tf
-//AWS
-environment = "<<your envirenment prefix>>"
-region      = "<<REGION>>"
+# VPC Values
+environment = "xyx"
+region      = "us-west-2"
+
 availability_zones = [
-  "<<REGION-AZ>>",
-  "<<REGION-AZ>>",
-  "<<REGION-AZ>>",
+  "us-west-2a",
+  "us-west-2b",
+  "us-west-2c",
+  "us-west-2d",
 ]
 
-/* module networking */
-vpc_cidr             = "<<CIDR>>"
-public_subnets_cidr  = ["<<SUBNET>>", ...]
-private_subnets_cidr = ["<<SUBNET>>", ...]
+# VPC - Networking Values
+vpc_cidr = "170.50.0.0/16"
+
+# Launch Configuration Values
+lc_name          = "xyx-lc"
+lc_instance_type = "t2.micro"
+
+# Auto Scaling Group Values
+asg_min_size         = 1
+asg_max_size         = 3
+asg_desired_capacity = 2
+asg_name             = "xyx-asg"
+
 ```
 
 And then run in your terminal
 
 ```sh
 terraform apply -var-file=values.tfvars
+```
+
+
+# Bug
+
+When trying to add the value from `formatdate("DD MM YYYY hh:mm", timestamp())` the following error is displayed.
+
+```
+Error: Provider produced inconsistent final plan
+
+When expanding the plan for module.xyx-vpc.aws_route_table.public to include new values
+learned so far during apply, provider "registry.terraform.io/hashicorp/aws" produced an
+invalid new value for .tags_all: new element "CreatedAt" has appeared.
+
+This is a bug in the provider, which should be reported in the provider's own issue
+tracker.
 ```

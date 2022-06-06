@@ -2,15 +2,22 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
   }
 }
 
+resource "time_static" "example" {}
+
 data "aws_availability_zones" "all" {}
 
+/* There's a bug related with the provided and timestamp is */
 locals {
-  createdAt = formatdate("YYYY-MM-DD", timestamp())
+  timestamp_formatted = formatdate("YYYY-MM-DD  hh:mm", time_static.example.month)
+}
+
+output "timestamp_formatted" {
+  value = local.timestamp_formatted
 }
 
 provider "aws" {
@@ -18,10 +25,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Environment  = var.environment
-      Owner        = "Brayan Lopez"
-      Project      = "nClouds Bootcamp"
-      CreationDate = local.createdAt
+      Environment = "${var.environment}"
+      Owner       = "Brayan Lopez"
+      Project     = "nClouds Bootcamp"
     }
   }
 }

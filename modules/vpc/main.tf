@@ -1,10 +1,10 @@
+/*==== The VPC ======*/
 resource "aws_vpc" "xyx-vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
-    Name        = "${var.environment}-vpc"
-    Environment = "${var.environment}"
+    Name = "${var.environment}-vpc"
   }
 }
 /*==== The VPC ======*/
@@ -14,8 +14,7 @@ resource "aws_vpc" "xyx-vpc" {
 resource "aws_internet_gateway" "xyx-ig" {
   vpc_id = aws_vpc.xyx-vpc.id
   tags = {
-    Name        = "${var.environment}-igw"
-    Environment = "${var.environment}"
+    Name = "${var.environment}-igw"
   }
 }
 
@@ -31,8 +30,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = element(aws_subnet.public_subnet.*.id, 0)
   depends_on    = [aws_internet_gateway.xyx-ig]
   tags = {
-    Name        = "${var.environment}-nat"
-    Environment = "${var.environment}"
+    Name = "${var.environment}-nat"
   }
 }
 
@@ -44,8 +42,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone       = element(var.availability_zones, count.index)
   map_public_ip_on_launch = true
   tags = {
-    Name        = "${var.environment}-${element(var.availability_zones, count.index)}-public-subnet"
-    Environment = "${var.environment}"
+    Name = "${var.environment}-${element(var.availability_zones, count.index)}-public-subnet"
   }
 }
 
@@ -57,8 +54,7 @@ resource "aws_subnet" "private_subnet" {
   availability_zone       = element(var.availability_zones, count.index)
   map_public_ip_on_launch = false
   tags = {
-    Name        = "${var.environment}-${element(var.availability_zones, count.index)}-private-subnet"
-    Environment = "${var.environment}"
+    Name = "${var.environment}-${element(var.availability_zones, count.index)}-private-subnet"
   }
 }
 
@@ -66,8 +62,7 @@ resource "aws_subnet" "private_subnet" {
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.xyx-vpc.id
   tags = {
-    Name        = "${var.environment}-private-route-table"
-    Environment = "${var.environment}"
+    Name = "${var.environment}-private-route-table"
   }
 }
 
@@ -75,8 +70,7 @@ resource "aws_route_table" "private" {
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.xyx-vpc.id
   tags = {
-    Name        = "${var.environment}-public-route-table"
-    Environment = "${var.environment}"
+    Name = "${var.environment}-public-route-table"
   }
 }
 
@@ -124,9 +118,6 @@ resource "aws_security_group" "default" {
     to_port   = "0"
     protocol  = "-1"
     self      = "true"
-  }
-  tags = {
-    Environment = "${var.environment}"
   }
 }
 /*==== VPC's Default Security Group ======*/
