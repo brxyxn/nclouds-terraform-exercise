@@ -4,6 +4,19 @@ This information is part of the **DevOps Bootcamp** taught by nClouds Academy.
 
 ## Description
 
+### Homework 1
+
+The requested resources for this activity:
+
+- VPC
+- Internet Gateway
+- 3 Public Subnets
+- 3 Private Subnets
+- 2 RouteTables (1 Public, 1 Private)
+- NAT Gateway
+
+### Homework 2
+
 Modify your Homework 1 and create the following modules:
 
 - VPC Module
@@ -13,6 +26,14 @@ Modify your Homework 1 and create the following modules:
 You must follow the standards that we covered during the classes.
 
 Push everything to your Github Repo and send me the link.
+
+### Homework 3
+
+Let's improve what we have:
+- Generate dynamic CIDR for the subnets using Terraform functions
+- Iterate to create a number of public and private subnets equal to the number of availability zones the Region has
+- Use a `data` to get the AMI for the AutoScaling Group
+- Tag all the resources with the DateTime when they got created (Use Terraform locals)
 
 ## How to run
 
