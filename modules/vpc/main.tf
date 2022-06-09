@@ -1,3 +1,7 @@
+locals {
+  DateTime = formatdate("DD MMM YYYY - HH:mm AA ZZZ", timestamp())
+}
+
 /*==== The VPC ======*/
 resource "aws_vpc" "xyx-vpc" {
   cidr_block           = var.vpc_cidr
@@ -5,6 +9,7 @@ resource "aws_vpc" "xyx-vpc" {
   enable_dns_support   = true
   tags = {
     Name = "${var.environment}-vpc"
+    CreationDateTime = local.DateTime
   }
 }
 /*==== The VPC ======*/

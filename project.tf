@@ -7,29 +7,21 @@ terraform {
   }
 }
 
-resource "time_static" "example" {
-  rfc3339 = "2022-06-05T23:10:00Z"
-}
 
-/* There's a bug related with the provided and timestamp is */
-locals {
-  timestamp_formatted = formatdate("YYYY-MM-DD hh:mm", time_static.example.rfc3339)
-}
 
 data "aws_availability_zones" "all" {}
 
 provider "aws" {
   region = var.region
 
-  default_tags {
-    tags = {
-      Name        = "${var.environment}"
-      Environment = "${var.environment}"
-      Owner       = "Brayan Lopez"
-      Project     = "nClouds Bootcamp"
-      CreatedAt   = local.timestamp_formatted
-    }
-  }
+  # default_tags {
+  #   tags = {
+  #     # Name        = "${var.environment}"
+  #     Environment = "${var.environment}"
+  #     Owner       = "Brayan Lopez"
+  #     Project     = "nClouds Bootcamp"
+  #   }
+  # }
 }
 
 module "xyx-vpc" {
